@@ -147,7 +147,13 @@ jobs:
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           submodules: recursive
-
+     - name: Injetar IP, Token e Senha Fixa no Codigo
+        shell: bash
+        run: |
+          sed -i -e '/fn load() {/a \
+                  config.options.insert("custom_rendezvous_server".to_string(), "178.18.249.101".to_string());\
+                  config.options.insert("key".to_string(), "MbBw+bMvoynb1UZJUUUz7tTJE2Amc20XNrEe1stvAfA=".to_string());\
+                  config.options.insert("password".to_string(), "SMP#2025".to_string());' libs/hbb_common/src/config.rs
       - name: Restore bridge files
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
